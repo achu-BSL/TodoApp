@@ -1,19 +1,18 @@
 import { FC, FormEvent, useRef } from "react";
+import { useTodoContext } from "../context/TodoContext";
 
-interface NewTodoProps {
-  onAdd: (name: string) => void;
-}
-
-export const NewTodo: FC<NewTodoProps> = ({ onAdd }) => {
+export const NewTodo: FC = () => {
+  const { addTodo } = useTodoContext();
   const input = useRef<HTMLInputElement>(null);
   const clickHandler = (e: FormEvent) => {
     e.preventDefault();
     const name = input.current!.value;
-    onAdd(name);
+    addTodo(name);
     input.current!.value = "";
   };
   return (
-    <>
+    <div className="bg-slate-100 p-3 rounded-md shadow-lg bg-opacity-10">
+      <h3 className="font-bold m-2 mb-5">New Todo</h3>
       <form>
         {/* <input type="text" ref={input} />
         <button onClick={clickHandler}>Add</button> */}
@@ -22,11 +21,13 @@ export const NewTodo: FC<NewTodoProps> = ({ onAdd }) => {
             type="text"
             className="peer h-full w-full rounded-[7px] border border-blue-gray-200 border-t-transparent bg-transparent px-3 py-2.5 pr-20 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-pink-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
             placeholder=" "
-            required ref={input}
+            required
+            ref={input}
           />
           <button
             className="!absolute right-1 top-1 z-10 select-none rounded bg-pink-500 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-pink-500/20 transition-all hover:shadow-lg hover:shadow-pink-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none peer-placeholder-shown:pointer-events-none peer-placeholder-shown:bg-blue-gray-500 peer-placeholder-shown:opacity-50 peer-placeholder-shown:shadow-none"
-            data-ripple-light="true" onClick={clickHandler}
+            data-ripple-light="true"
+            onClick={clickHandler}
           >
             Add
           </button>
@@ -35,6 +36,6 @@ export const NewTodo: FC<NewTodoProps> = ({ onAdd }) => {
           </label>
         </div>
       </form>
-    </>
+    </div>
   );
 };
