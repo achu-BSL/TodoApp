@@ -1,17 +1,18 @@
 import { useTodoContext } from "../context/TodoContext";
+import CloseIcon from "@mui/icons-material/Close";
 export interface TodoInterface {
-  id: number;
-  name: string;
+  id: string;
+  task_label: string;
   isCompleted: boolean;
 }
 
 export const TodoList = () => {
-  const { todos, changeTodoStatus } = useTodoContext();
+  const { state, changeTodoStatus, deleteTodo } = useTodoContext();
   return (
     <div className="flex flex-col gap-2">
-      {todos.map((todo) => (
+      {state.todoList.map((todo) => (
         <div
-          className="flex justify-between bg-pink-300 p-5 bg-opacity-75 font-serif rounded-md border-2 border-pink-900"
+          className="relative flex justify-between bg-pink-300 p-5 bg-opacity-75 font-serif rounded-md border-2 border-pink-900"
           key={todo.id}
         >
           <h1
@@ -21,7 +22,7 @@ export const TodoList = () => {
                 : "text-xl"
             }
           >
-            {todo.name}
+            {todo.task_label}
           </h1>
           {todo.isCompleted ? (
             <input
@@ -41,6 +42,9 @@ export const TodoList = () => {
               className="w-5"
             />
           )}
+          <button className="absolute right-1 top-0.5" onClick={() => deleteTodo(todo.id)}>
+            <CloseIcon fontSize="small" />
+          </button>
         </div>
       ))}
     </div>

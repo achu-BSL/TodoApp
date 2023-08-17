@@ -2,12 +2,12 @@ import { FC, FormEvent, useRef } from "react";
 import { useTodoContext } from "../../context/TodoContext";
 
 export const NewOne: FC = () => {
-  const { addTodo, isTodoBucket } = useTodoContext();
+  const { addTodo, addBucket, isTodoBucket } = useTodoContext();
   const input = useRef<HTMLInputElement>(null);
   const clickHandler = (e: FormEvent) => {
     e.preventDefault();
-    const name = input.current!.value;
-    addTodo(name);
+    const inpValue = input.current!.value;
+    isTodoBucket ? addBucket(inpValue) : addTodo(inpValue);
     input.current!.value = "";
   };
   return (

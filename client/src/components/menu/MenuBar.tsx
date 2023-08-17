@@ -10,7 +10,7 @@ export const MenuBar: FC = () => {
     <>
       <div>
         <NewOne />
-        <div className="flex gap-2 flex-col px-2 py-3 container border border-slate-900">
+        <div className="flex gap-2 flex-col px-2 py-3 container rounded-lg shadow-lg mt-3">
           {isTodoBucket ? <TodoBucketOption /> : <TodoListOption />}
         </div>
       </div>

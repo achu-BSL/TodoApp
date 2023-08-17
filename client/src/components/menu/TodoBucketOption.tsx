@@ -7,11 +7,11 @@ export const TodoBucketOption: FC = () => {
     <>
       <div
         onClick={toggleOption}
-        className="p-3 bg-fuchsia-200 hover:bg-fuchsia-300"
+        className="rounded-md shadow-lg p-3 bg-fuchsia-200 hover:bg-fuchsia-300"
       >
         Todo List
       </div>
-      <div className="p-3 bg-fuchsia-300 ">Todo Buckets</div>
+      <div className="rounded-md shadow-lg p-3 bg-fuchsia-300 ">Todo Buckets</div>
     </>
   );
 };
