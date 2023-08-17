@@ -10,6 +10,8 @@ interface TodoContextInterface {
     addTodo: (name: string) => void;
     changeTodoStatus: (id: number) => void;
     todos: TodoInterface[];
+    isTodoBucket: boolean;
+    toggleOption: () => void;
 }
 
 const TodoContext = createContext({} as TodoContextInterface);
@@ -21,7 +23,12 @@ export const useTodoContext = () => {
 export const TodoProvider = ({children}: TodoProviderProps) => {
 
   const [todos, setTodos] = useState<TodoInterface[]>([]);
+  const [isTodoBucket, setIsTodoBucket] = useState(false);
 
+
+  const toggleOption = () => {
+    setIsTodoBucket(prev => !prev);
+  }
 
    /**
    * Create new todo.
@@ -51,7 +58,7 @@ export const TodoProvider = ({children}: TodoProviderProps) => {
     });
   };
     return (
-        <TodoContext.Provider value={{addTodo, changeTodoStatus, todos}}>
+        <TodoContext.Provider value={{addTodo, changeTodoStatus, todos, isTodoBucket, toggleOption}}>
             {children}
         </TodoContext.Provider>
     );
